@@ -1,31 +1,48 @@
-package com.example.tests;
+
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import functions.FunctionClassDriver;
+
 public class AcessarLinkPaciaLinha {
-  private WebDriver driver;
-  private String baseUrl;
+  private WebDriver driver;  
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://www2.portoalegre.rs.gov.br/eptc/default.php?p_secao=158";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver = FunctionClassDriver.startFirefoxDriver("http://www2.portoalegre.rs.gov.br/eptc/default.php?p_secao=158");
+    
   }
 
   @Test
   public void testAcessarLinkPaciaLinha() throws Exception {
-    driver.get(baseUrl + "/eptc/default.php?p_secao=158");
+    //Sets first parent window
+	String parentHandle = driver.getWindowHandle() ;
+    
     driver.findElement(By.linkText("Por Bacia e por Linha")).click();
+    
+    System.out.println(driver.getCurrentUrl());
+    
+    //focus in new opened window.
+    for(String winHandle : driver.getWindowHandles()){
+    	
+    	if(winHandle != parentHandle){
+    	   driver.switchTo().window(winHandle);
+    	}
+    	
+    }
+    
     try {
       assertEquals("http://www.eptc.com.br/EPTC_Itinerarios/linha.asp", driver.getCurrentUrl());
     } catch (Error e) {

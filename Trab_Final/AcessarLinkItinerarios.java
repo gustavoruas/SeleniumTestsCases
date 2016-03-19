@@ -1,4 +1,4 @@
-package com.example.tests;
+
 
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,26 +9,29 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.regex.Pattern;
-import static org.apache.commons.lang3.StringUtils.join;
+import functions.FunctionClass;
+//import static org.apache.commons.lang3.StringUtils.join;
 
 public class AcessarLinkItinerarios {
 	private Selenium selenium;
 
 	@Before
 	public void setUp() throws Exception {
-		WebDriver driver = new FirefoxDriver();
-		String baseUrl = "http://www2.portoalegre.rs.gov.br/";
-		selenium = new WebDriverBackedSelenium(driver, baseUrl);
+		//Function that returns Selenium connection driver
+		selenium = FunctionClass.startFirefoxURL("http://www2.portoalegre.rs.gov.br/");			
 	}
 
 	@Test
-	public void testAcessarLinkItinerarios() throws Exception {
-		selenium.open("/eptc/");
-		selenium.click("link=Itinerários e Horários de ônibus");
+	public void testAcessarLinkItinerarios() {
+		boolean fin_assert; 
+		
+		selenium.open("/eptc/default.php?p_secao=158");
+		//selenium.click("link=Itinerários e Horários de ônibus");
 		selenium.waitForPageToLoad("30000");
-		verifyEquals("Por Logradouros", selenium.getText("link=Por Logradouros"));
-		verifyEquals("Por Bacia e por Linha", selenium.getText("link=Por Bacia e por Linha"));
-		assertTrue(selenium.getLocation().matches("^http://www2\\.portoalegre\\.rs\\.gov\\.br/eptc/default\\.php[\\s\\S]p_secao=158$"));
+		assertEquals("Por Logradouros", selenium.getText("link=Por Logradouros"));		
+		assertEquals("Por Bacia e por Linha", selenium.getText("link=Por Bacia e por Linha"));
+		assertTrue(selenium.getLocation().matches("^http://www2\\.portoalegre\\.rs\\.gov\\.br/eptc/default\\.php[\\s\\S]p_secao=158$"));		
+		
 	}
 
 	@After

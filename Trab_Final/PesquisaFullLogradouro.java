@@ -1,4 +1,3 @@
-package com.example.tests;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -8,23 +7,20 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import functions.FunctionClassDriver;
 
 public class PesquisaFullLogradouro {
-  private WebDriver driver;
-  private String baseUrl;
+  private WebDriver driver;  
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://www.eptc.com.br/EPTC_Itinerarios/Lograd1.asp";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  driver = FunctionClassDriver.startFirefoxDriver("http://www.eptc.com.br/EPTC_Itinerarios/Lograd1.asp");
   }
 
   @Test
-  public void testPesquisaFullLogradouro() throws Exception {
-    driver.get(baseUrl + "/EPTC_Itinerarios/Lograd1.asp");
+  public void testPesquisaFullLogradouro() throws Exception {    
     new Select(driver.findElement(By.name("Logradouro"))).selectByVisibleText("ADELINO FERREIRA JARDIM , AV");
     driver.findElement(By.cssSelector("input.FormatoBotao")).click();
     try {

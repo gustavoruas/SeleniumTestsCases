@@ -1,24 +1,31 @@
-package com.example.tests;
+
+//Exported as JUnit Webdriver Backed
 
 import com.thoughtworks.selenium.Selenium;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.WebDriver;
+
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
+
+import functions.FunctionClass;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 import java.util.regex.Pattern;
-import static org.apache.commons.lang3.StringUtils.join;
+//import static org.apache.commons.lang3.StringUtils.join;
 
 public class PesquisaLogradouro {
 	private Selenium selenium;
 
 	@Before
 	public void setUp() throws Exception {
-		WebDriver driver = new FirefoxDriver();
-		String baseUrl = "http://www2.portoalegre.rs.gov.br/";
-		selenium = new WebDriverBackedSelenium(driver, baseUrl);
+		//Function that returns Selenium connection driver
+		selenium = FunctionClass.startFirefoxURL("http://www2.portoalegre.rs.gov.br/");	
 	}
 
 	@Test
@@ -28,9 +35,8 @@ public class PesquisaLogradouro {
 		selenium.select("name=Logradouro", "label=EDVALDO PEREIRA PAIVA , AV");
 		selenium.click("css=input.FormatoBotao");
 		selenium.waitForPageToLoad("30000");
-		verifyEquals("F993 - FUTEBOL BEIRA RIO - BAIRRO/CENTRO", selenium.getText("//div[@id='tabs-1']/p/table/tbody/tr[9]/td/font/b"));
-		selenium.click("xpath=(//input[@name='Action'])[12]");
-		// selenium.();
+		assertEquals("F993 - FUTEBOL BEIRA RIO - BAIRRO/CENTRO", selenium.getText("//div[@id='tabs-1']/p/table/tbody/tr[9]/td/font/b"));
+		selenium.click("xpath=(//input[@name='Action'])[12]");		
 	}
 
 	@After
