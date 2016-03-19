@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 import java.util.regex.Pattern;
 import static org.apache.commons.lang3.StringUtils.join;
 
-public class VerificaDataInicioMaiorFim {
+public class VerificaCalendario {
 	private Selenium selenium;
 
 	@Before
@@ -22,24 +22,18 @@ public class VerificaDataInicioMaiorFim {
 	}
 
 	@Test
-	public void testVerificaDataInicioMaiorFim() throws Exception {
+	public void testVerificaCalendario() throws Exception {
 		selenium.open("/parkcalc/");
-		selenium.select("id=Lot", "label=Long-Term Surface Parking");
 		selenium.click("css=img[alt=\"Pick a date\"]");
 		selenium.waitForPopUp("DateTimePicker", "30000");
 		selenium.selectWindow("name=DateTimePicker");
 		selenium.click("link=12");
 		selenium.selectWindow("null");
-		verifyEquals("3/12/2016", selenium.getText("id=EntryDate"));
-		selenium.click("xpath=(//img[@alt='Pick a date'])[2]");
+		selenium.click("css=img[alt=\"Pick a date\"]");
 		selenium.waitForPopUp("DateTimePicker", "30000");
 		selenium.selectWindow("name=DateTimePicker");
-		selenium.click("link=6");
-		selenium.selectWindow("null");
-		verifyFalse(selenium.isTextPresent("id=ExitDate"));
-		selenium.click("name=Submit");
-		selenium.waitForPageToLoad("30000");
-		assertEquals("ERROR! Your Exit Date Or Time Is Before Your Entry Date or Time", selenium.getText("css=b"));
+		selenium.click("link=14");
+		assertFalse(selenium.isTextPresent("id=ExitDate"));
 	}
 
 	@After
