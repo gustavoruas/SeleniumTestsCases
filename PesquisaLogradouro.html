@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www2.portoalegre.rs.gov.br/" />
+<title>PesquisaLogradouro</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PesquisaLogradouro</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/eptc/default.php?p_secao=158</td>
+	<td></td>
+</tr>
+<tr>
+	<td>openWindow</td>
+	<td>http://www.eptc.com.br/EPTC_Itinerarios/Lograd1.asp</td>
+	<td>LogWindow</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=Logradouro</td>
+	<td>label=EDVALDO PEREIRA PAIVA , AV</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.FormatoBotao</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='tabs-1']/p/table/tbody/tr[9]/td/font/b</td>
+	<td>F993 - FUTEBOL BEIRA RIO - BAIRRO/CENTRO</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@name='Action'])[12]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
