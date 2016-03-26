@@ -34,11 +34,13 @@ public class CalculoRecisaoPage {
 	}
 	
 	public void setDropDownValue(String id, String valor){
+		
 		WebElement element = pdriver.findElement(By.id(id));
 		
 		Select dropdown = new Select(element);
 		
 		dropdown.selectByVisibleText(valor);
+		
 	}
 	
 	public void clickButton(String str){		

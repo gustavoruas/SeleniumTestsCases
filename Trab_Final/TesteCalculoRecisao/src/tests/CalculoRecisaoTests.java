@@ -23,7 +23,8 @@ public class CalculoRecisaoTests {
 		driver = Driver.createDrive("/calculo/rescisao-clt");
 		pagina = new CalculoRecisaoPage(driver);	
 	}
-
+    
+	
 	@Test
 	public void testeTabelaResutadosExiste() throws Exception {			
 		pagina.setInputCampo("Entrada_UltimoSalario", "2000,00");
@@ -59,12 +60,29 @@ public class CalculoRecisaoTests {
 	@Test
 	public void testeDataInicioMaiorFim() throws Exception{
 		pagina.setInputCampo("Entrada_UltimoSalario", "2000,00");
-		pagina.setInputCampo("Entrada_DataInicioTrabalho", "01/01/2015");		
+		pagina.setInputCampo("Entrada_DataInicioTrabalho", "01/01/2005");		
 		pagina.setInputCampo("Entrada_DataFimTrabalho", "10/10/2011");
 		pagina.setDropDownValue("Entrada_Motivo", "Término de contrato de experiência");
 		pagina.clickButton("Calcular");
 		
 		assertTrue(pagina.formDataError());
+	}
+	
+	
+	@Test
+	public void AvisoPrevioIndenizado() throws Exception{
+		pagina.setInputCampo("Entrada_UltimoSalario", "8000,00");
+		pagina.setInputCampo("Entrada_DataInicioTrabalho", "01/01/2005");		
+		pagina.setInputCampo("Entrada_DataFimTrabalho", "10/10/2015");
+		pagina.setDropDownValue("Entrada_Motivo", "Pedido de demissão");
+		
+		pagina.setDropDownValue("Entrada_TipoAvisoPrevio", "Indenizado");
+		pagina.clickButton("Calcular");
+		
+		double valor = Double.parseDouble(pagina.getResultadoFinal());
+		
+		assertEquals(7120.53, valor);
+		
 	}
 	
 
