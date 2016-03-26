@@ -81,7 +81,7 @@ public class CalculoRecisaoTests {
 		
 		double valor = Double.parseDouble(pagina.getResultadoFinal());
 		
-		assertEquals(7120.53, valor);
+		assertEquals(7120.53, valor, 0.01);
 		
 	}
 	
