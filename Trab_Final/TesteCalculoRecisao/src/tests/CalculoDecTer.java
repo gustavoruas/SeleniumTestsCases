@@ -46,7 +46,7 @@ public class CalculoDecTer {
 	
 	@Test
 	public void testeErroExistenteForm() throws Exception{
-		pagina.setInputCampo("Entrada_SalarioBruto", "2000,00");
+		pagina.setInputCampo("Entrada_SalarioBruto", "0,00");
 		pagina.setInputCampo("Entrada_NumDependentes", "0");		
 		pagina.setInputCampo("Entrada_MesesTrabalhados", "50");
 		
@@ -55,7 +55,16 @@ public class CalculoDecTer {
 		assertTrue(pagina.formDataError());
 	}
 	
-	
+	@Test
+	public void testeNUmeroMEsesMaior12(){
+		pagina.setInputCampo("Entrada_SalarioBruto", "2000,00");
+		pagina.setInputCampo("Entrada_NumDependentes", "0");		
+		pagina.setInputCampo("Entrada_MesesTrabalhados", "50");
+		
+        pagina.clickButton("Calcular");
+		
+		assertFalse(pagina.formDataError());
+	}
 	
 	@After
 	public void tearDown() throws Exception {
